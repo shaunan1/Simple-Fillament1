@@ -17,16 +17,18 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
     protected static ?int $navigationSort = 1;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name'),
-                Forms\Components\TextInput::make('decription'),
+                Forms\Components\TextInput::make('name')
+                ->required(),
                 Forms\Components\Select::make('status')
                 ->options(['active' => 'Active', 'non active' => 'Non Active'])
+                ->required(),
+                Forms\Components\TextInput::make('decription'),
             ]);
     }
 

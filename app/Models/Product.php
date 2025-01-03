@@ -10,12 +10,12 @@ class Product extends Model
 {
     use HasFactory;
 
-    // Tentukan nama tabel jika tidak sesuai dengan konvensi
     protected $table = 'products';
 
-    // Tentukan atribut yang dapat diisi massal
     protected $fillable = [
         'category_id',
+        'payment_id',
+        'product_id',
         'name',
         'price',
         'stock',
@@ -32,13 +32,11 @@ class Product extends Model
         });
     }
 
-    // Definisikan relasi dengan model Category
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    // Definisikan relasi dengan model OrderDetail
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class);

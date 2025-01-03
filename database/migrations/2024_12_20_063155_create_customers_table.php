@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('gender', ['male', 'female', 'other']);
+            $table->string('gender');
             $table->string('email')->unique();
             $table->string('phone');
             $table->date('birthday');

@@ -26,10 +26,13 @@ class OrderResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('customer_id')
-                ->options(Customer::all()->pluck('name', 'id')),
+                ->options(Customer::all()->pluck('name', 'id'))
+                ->label('Customer'),
                 Forms\Components\Select::make('payment_id')
                 ->options(Payment::all()->pluck('name', 'id')),
-                Forms\Components\TextInput::make('total'),
+                Forms\Components\Select::make('Product_id')
+                ->options(Payment::all()->pluck('name', 'id')),
+                Forms\Components\TextInput::make('total')->prefix('Rp. '),
                 Forms\Components\TextInput::make('note'),
             ]);
     }
@@ -40,7 +43,7 @@ class OrderResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('customer_id'),
                 Tables\Columns\TextColumn::make('payment_id'),
-                Tables\Columns\TextColumn::make('total'),
+                Tables\Columns\TextColumn::make('total')->formatStateUsing(fn ($state) => 'Rp. ' . number_format($state)),
                 Tables\Columns\TextColumn::make('note'),
             ])
             ->filters([

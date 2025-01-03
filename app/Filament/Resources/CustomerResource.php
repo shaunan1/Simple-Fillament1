@@ -17,17 +17,21 @@ class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
     protected static ?int $navigationSort = 4;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-circle';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name'),
-                Forms\Components\TextInput::make('gender'),
+                Forms\Components\Select::make('gender')
+                ->options([
+                    'male' => 'Male',
+                    'female' => 'Female',
+                ]),
                 Forms\Components\TextInput::make('email'),
                 Forms\Components\TextInput::make('phone'),
-                Forms\Components\TextInput::make('birthday'),
+                Forms\Components\DatePicker::make('birthday'),
             ]);
     }
 

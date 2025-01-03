@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('http://127.0.0.1:8000/admin');
 });
 
 Route::get('/dashboard', function () {

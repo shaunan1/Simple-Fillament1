@@ -19,7 +19,7 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
     protected static ?int $navigationSort = 2;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
 
     public static function form(Form $form): Form
     {
@@ -37,13 +37,13 @@ class ProductResource extends Resource
                     ->required()
                     ->disabled(),
                 Forms\Components\TextInput::make('price')
-                    ->required(),
+                    ->required()
+                    ->prefix('Rp.'),
                 Forms\Components\TextInput::make('stock')
                     ->required(),
                 Forms\Components\FileUpload::make('image')
                     ->disk('public') 
                     ->directory('images') 
-                    ->required(),
             ]);
     }
     
@@ -54,7 +54,7 @@ class ProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('category_id')->label('Category'),
                 Tables\Columns\TextColumn::make('slug')->label('Slug'),
-                Tables\Columns\TextColumn::make('price')->label('Price'),
+                Tables\Columns\TextColumn::make('price')->label('Price')->formatStateUsing(fn ($state) => 'Rp. ' . $state), 
                 Tables\Columns\TextColumn::make('stock')->label('Stock'),
                 Tables\Columns\ImageColumn::make('image')
                     ->disk('public')
